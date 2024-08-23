@@ -1,3 +1,6 @@
 [submodule "dotfiles-nix"]
 	path = dotfiles-nix
 	url = https://github.com/Frankoslaw/dotfiles-nix.git
+[submodule "homelab-kube"]
+	path = homelab-kube
+	url = git@github.com:Frankoslaw/homelab-kube.git
