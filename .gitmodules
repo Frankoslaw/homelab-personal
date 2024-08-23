@@ -1,0 +1,3 @@
+[submodule "dotfiles-nix"]
+	path = dotfiles-nix
+	url = https://github.com/Frankoslaw/dotfiles-nix.git

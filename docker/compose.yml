@@ -1,0 +1,14 @@
+services:
+  nixos-anywhere:
+    image: nixos/nix:2.24.3
+    stdin_open: true
+    tty: true
+    network_mode: host
+    volumes:
+      - nixos-anywhere-vol:/root
+      - type: bind
+        source: ./nix.conf
+        target: /etc/nix/nix.conf
+
+volumes:
+  nixos-anywhere-vol:

@@ -1,0 +1,12 @@
+{
+	"editor.indentSize": 4,
+	"editor.tabSize": 4,
+	"editor.detectIndentation": false,
+	"prettier.proseWrap": "always",
+	"prettier.singleQuote": true,
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true,
+	"[markdown]": {
+		"editor.formatOnSave": false
+	}
+}

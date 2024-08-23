@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/ubuntu2004"
+  config.ssh.insert_key = true
+
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  config.vm.provider :libvirt do |virt|
+    virt.title = "homelab"
+    virt.memory = 2048
+
+    virt.driver = "kvm"
+    virt.cpus = 4
+    virt.cputopology :sockets => '1', :cores => '4', :threads => '1'
+    virt.cpu_mode = 'host-model'
+
+    virt.storage :file, :size => '40G'
+  end
+
+  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/me.pub"
+
+  config.vm.provision "shell", inline: <<-SHELL
+    cat /home/vagrant/.ssh/me.pub >> /home/vagrant/.ssh/authorized_keys
+
+    echo "PasswordAuthentication no" | sudo tee -a /etc/ssh/sshd_config
+    echo "PermitRootLogin without-password" | sudo tee -a /etc/ssh/sshd_config
+
+    sudo mkdir -p /root/.ssh/
+    sudo cp -r /home/vagrant/.ssh /root/
+
+    sudo systemctl restart sshd
+  SHELL
+end
